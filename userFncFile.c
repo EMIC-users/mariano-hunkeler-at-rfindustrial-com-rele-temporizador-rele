@@ -14,28 +14,37 @@
 
 /* User Variables */
 bool fase_activa = true;
+uint16_t contador_minutos = 0;
 
 void onReset()
 {
     relay_Relay1(1);
     fase_activa = /* unsupported parameter type: emic-literal-boolean */;
-    setTime1(60000, 'T');
+    contador_minutos = 0;
+    setTime1(60000, 'A');
 }
 
 
 void etOut1()
 {
+    contador_minutos = contador_minutos + 1;
     if (fase_activa)
     {
-        relay_Relay1(0);
-        fase_activa = /* unsupported parameter type: emic-literal-boolean */;
-        setTime1(60000, 'T');
+        if (contador_minutos >= 10)
+        {
+            relay_Relay1(0);
+            fase_activa = /* unsupported parameter type: emic-literal-boolean */;
+            contador_minutos = 0;
+        }
     }
     else
     {
-        relay_Relay1(1);
-        fase_activa = /* unsupported parameter type: emic-literal-boolean */;
-        setTime1(60000, 'T');
+        if (contador_minutos >= 60)
+        {
+            relay_Relay1(1);
+            fase_activa = /* unsupported parameter type: emic-literal-boolean */;
+            contador_minutos = 0;
+        }
     }
 }
 
