@@ -28,7 +28,7 @@ void onReset()
 void etOut1()
 {
     contador_minutos = contador_minutos + 1;
-    if (fase_activa)
+    if (fase_activa == /* unsupported parameter type: emic-literal-boolean */)
     {
         if (contador_minutos >= 10)
         {
